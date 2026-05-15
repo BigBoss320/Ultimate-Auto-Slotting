@@ -49,11 +49,11 @@ pub fn check_deps() -> bool {
     let mut passed = true;
 
     for dep in [
-        "rom:/skyline/plugins/libparam_config.nro",
+        //"rom:/skyline/plugins/libparam_config.nro",
         "rom:/skyline/plugins/libthe_csk_collection.nro",
         "rom:/skyline/plugins/libarcropolis.nro",
-        "rom:/skyline/plugins/libnro_hook.nro",
-        "rom:/skyline/plugins/libsmashline_plugin.nro",
+        //"rom:/skyline/plugins/libnro_hook.nro",
+        //"rom:/skyline/plugins/libsmashline_plugin.nro",
     ] {
         if !std::path::Path::new(dep).is_file() {
             println!("{} not found! This installation is incomplete. Please download all dependencies listed in the README file.", dep);
@@ -118,6 +118,11 @@ extern "C" fn mods_mounted(_ev: arcropolis_api::Event) {
 
     the_csk_collection_api::add_chara_db_entry_info(
         the_csk_collection_api::CharacterDatabaseEntry { 
+            skill_list_order: the_csk_collection_api::SignedByteType::Optional(Some(20)), 
+            disp_order: the_csk_collection_api::SignedByteType::Optional(Some(20)), 
+            save_no: the_csk_collection_api::SignedByteType::Optional(Some(20)), 
+            exhibit_year: the_csk_collection_api::ShortType::Optional(Some(2006)), 
+            color_num: the_csk_collection_api::UnsignedByteType::Optional(Some(8)), 
             ui_chara_id: smash::hash40(YOUR_CHARA_ID) /* Hash40 of the new ui_chara ID */, 
             name_id: the_csk_collection_api::StringType::Overwrite(the_csk_collection_api::CStrCSK::new(YOUR_NAME_ID)), /* Your new name ID */
             fighter_kind: the_csk_collection_api::Hash40Type::Overwrite(smash::hash40(BASE_FIGHTER_KIND) /* Hash40 of the base fighter_kind */), 
@@ -125,15 +130,11 @@ extern "C" fn mods_mounted(_ev: arcropolis_api::Event) {
             ui_series_id: the_csk_collection_api::Hash40Type::Optional(Some(smash::hash40(CHARA_SERIES) /* Hash40 of the ui_series */)), 
             fighter_type: the_csk_collection_api::Hash40Type::Optional(Some(0x1353795179 /* Hash40 of fighter_type_normal */)), 
             alt_chara_id: the_csk_collection_api::Hash40Type::Optional(Some(0x0)), 
-            exhibit_year: the_csk_collection_api::ShortType::Optional(Some(2006)), 
             exhibit_day_order: the_csk_collection_api::IntType::Optional(Some(91303)), 
             ext_skill_page_num: the_csk_collection_api::SignedByteType::Optional(Some(0)), 
             is_img_ext_skill_page0: the_csk_collection_api::BoolType::Optional(Some(false)), 
             is_img_ext_skill_page1: the_csk_collection_api::BoolType::Optional(Some(false)), 
             is_img_ext_skill_page2: the_csk_collection_api::BoolType::Optional(Some(false)), 
-            skill_list_order: the_csk_collection_api::SignedByteType::Optional(Some(20)), 
-            disp_order: the_csk_collection_api::SignedByteType::Optional(Some(20)), 
-            save_no: the_csk_collection_api::SignedByteType::Optional(Some(20)), 
             chara_count: the_csk_collection_api::SignedByteType::Optional(Some(1)), 
             can_select: the_csk_collection_api::BoolType::Optional(Some(true)), 
             is_usable_soundtest: the_csk_collection_api::BoolType::Optional(Some(true)), 
@@ -150,7 +151,6 @@ extern "C" fn mods_mounted(_ev: arcropolis_api::Event) {
             result_pf0: the_csk_collection_api::BoolType::Optional(Some(true)), 
             result_pf1: the_csk_collection_api::BoolType::Optional(Some(true)), 
             result_pf2: the_csk_collection_api::BoolType::Optional(Some(true)), 
-            color_num: the_csk_collection_api::UnsignedByteType::Optional(Some(8)), 
             shop_item_tag: the_csk_collection_api::Hash40Type::Optional(Some(0x0)), 
             extra_hash_maps: the_csk_collection_api::Hash40Map::Overwrite(HashMap::from([
                     (0x1337FC912E /* Hash40 of characall_label_c00 */, the_csk_collection_api::Hash40Type::Optional(Some(smash::hash40(actual_characall)))),
